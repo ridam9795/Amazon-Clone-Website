@@ -1,11 +1,10 @@
 import React from "react";
-import "./Header.css";
+import "../css/Header.css";
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { auth } from "./firebase";
-
 function Header() {
   const [{ basket, user }, dispatch] = useStateValue();
 
@@ -13,14 +12,14 @@ function Header() {
     if (user) {
       auth.signOut();
     }
-  }
+  };
 
   return (
     <div className="header">
       <Link to="/">
         <img
           className="header__logo"
-          src="http://pngimg.com/uploads/amazon/amazon_PNG11.png"
+          src="https://www.logohouse.org/images/ecommerce%20logo%20maker.png"
         />
       </Link>
 
@@ -30,26 +29,23 @@ function Header() {
       </div>
 
       <div className="header__nav">
-        <Link to={!user && '/login'}>
+        <Link to={!user && "/login"}>
           <div onClick={handleAuthenticaton} className="header__option">
-            <span className="header__optionLineOne">Hello {!user ? 'Guest' : user.email}</span>
-            <span className="header__optionLineTwo">{user ? 'Sign Out' : 'Sign In'}</span>
+            <span className="header__optionLineOne">
+              Hello {!user ? "Guest" : user.email}
+            </span>
+            <span className="header__optionLineTwo">
+              {user ? "Sign Out" : "Sign In"}
+            </span>
           </div>
         </Link>
 
-        <Link to='/orders'>
+        <Link to="/orders">
           <div className="header__option">
             <span className="header__optionLineOne">Returns</span>
             <span className="header__optionLineTwo">& Orders</span>
           </div>
         </Link>
-        
-
-        <div className="header__option">
-          <span className="header__optionLineOne">Your</span>
-          <span className="header__optionLineTwo">Prime</span>
-        </div>
-
         <Link to="/checkout">
           <div className="header__optionBasket">
             <ShoppingBasketIcon />
@@ -58,6 +54,19 @@ function Header() {
             </span>
           </div>
         </Link>
+        <div className="header__option">
+          {/* <span className="header__optionLineOne">Your</span> */}
+          <span className="header__optionLineTwo">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              height="24"
+              viewBox="0 0 24 24"
+              width="24">
+              <path d="M0 0h24v24H0z" fill="#FFFFFF" />
+              <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z" />
+            </svg>
+          </span>
+        </div>
       </div>
     </div>
   );
